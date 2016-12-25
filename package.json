@@ -1,0 +1,22 @@
+{
+  "name": "alexa-game-check",
+  "version": "1.0.0",
+  "description": "Alexa skill for checking if there is a professional sports game in a city.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaccb/alexa-game-check.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaccb/alexa-game-check/issues"
+  },
+  "homepage": "https://github.com/zaccb/alexa-game-check#readme",
+  "dependencies": {
+    "htmlparser2": "3.9.2"
+  }
+}

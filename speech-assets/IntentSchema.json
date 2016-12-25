@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "GetEventIntent",
+      "slots": [
+        {
+          "name": "City",
+          "type": "LIST_OF_CITIES"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+GetEventIntent is there a game tonight
+GetEventIntent is there a game tonight in {City}
+GetEventIntent is there an event tonight
+GetEventIntent is there an event tonight in {City}
+GetEventIntent is something happening tonight
+GetEventIntent is something happening tonight in {City}
