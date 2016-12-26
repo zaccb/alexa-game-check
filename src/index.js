@@ -45,7 +45,7 @@ GameCheck.prototype.eventHandlers.onLaunch = function (launchRequest, session, r
  * Intent Handling
  */
 GameCheck.prototype.intentHandlers = {
-    "GetEventIntent": function (intent, session, response) {
+    "GetEventIntent": function (intent, session, response) {      
         console.log("Intent OBJ: " + intent);
 
         var itemSlot = intent.slots.City,
@@ -54,34 +54,17 @@ GameCheck.prototype.intentHandlers = {
             itemName = itemSlot.value.toLowerCase();
         }
 
-        var speechOutput,
-            repromptOutput;
-
         console.log(itemName);
 
         if(cities.indexOf(itemName) !== -1){
           var speech = checkGameByCity(itemName);
 
           if(speech !== null){
-            speechOutput = {
-                speech: speech,
-                type: AlexaSkill.speechOutputType.PLAIN_TEXT
-            };
-
-            response.tell(speechOutput);
+            respondSuccess(response, speech);
           } else {
             console.log("checkGameByCity() call failed;");
-            var speech = "I don't know about games in " + itemName + " yet.";
-
-            speechOutput = {
-                speech: speech,
-                type: AlexaSkill.speechOutputType.PLAIN_TEXT
-            };
-            repromptOutput = {
-                speech: "What else can I help with?",
-                type: AlexaSkill.speechOutputType.PLAIN_TEXT
-            };
-            response.ask(speechOutput, repromptOutput);
+            speech = "I don't know about games in " + itemName + " yet.";
+            respondFail(response, speech);
           }
         } else {
           console.log("slot value not in LIST_OF_CITIES");
@@ -122,31 +105,19 @@ exports.handler = function (event, context) {
 };
 
 function checkGameByCity(city){
-  // var url = "http://gametonight.in/" + city;
-  //
-  // var options = {
-  //     host : url,
-  //     method : 'GET'
-  // };
-  //
-  // var request = http.request(options, function(){
-  //   if(res.statusCode === '200'){
-  //     return "Yes";
-  //   } else {
-  //     return new Error("I don't know about events in that city yet.");
-  //   }
-  // });
-  //
-  // request.on('error', function(err) {
-  //     return new Error("I'm having a hard time connecting with the server right now.");
-  // });
-  //
-  // request.end();
-
   if(city === "seattle"){
     return "yes";
   }
   return "no";
+}
+
+function respondSuccess(response, msg){
+  var speechOutput = {
+      speech: msg,
+      type: AlexaSkill.speechOutputType.PLAIN_TEXT
+  };
+
+  response.tell(speechOutput);
 }
 
 function respondFail(response, msg){
