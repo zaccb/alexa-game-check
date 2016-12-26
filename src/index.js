@@ -45,7 +45,7 @@ GameCheck.prototype.eventHandlers.onLaunch = function (launchRequest, session, r
  * Intent Handling
  */
 GameCheck.prototype.intentHandlers = {
-    "GetEventIntent": function (intent, session, response) {      
+    "GetEventIntent": function (intent, session, response) {
         console.log("Intent OBJ: " + intent);
 
         var itemSlot = intent.slots.City,
@@ -67,9 +67,14 @@ GameCheck.prototype.intentHandlers = {
             respondFail(response, speech);
           }
         } else {
+          if(itemName){
+            speech = "I don't know about games in " + itemName + " yet. Sorry.";
+          } else {
+            speech = "Please let me know what city you want information about.";
+          }
+
           console.log("slot value not in LIST_OF_CITIES");
           console.log(itemName);
-          speech = "I don't know about games in " + itemName + " yet. Sorry.";
           respondFail(response, speech);
         }
     },
