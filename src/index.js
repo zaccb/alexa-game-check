@@ -106,7 +106,7 @@ exports.handler = function (event, context) {
 };
 
 function asyncCheckGameByCity(skillResponse, city){
-  var url = "http://gametonight.in/" + city;
+  var url = "http://gametonight.in/" + city.replace(/ /g,'');;
   request(url, function(error, response, html){
       console.log('response code: ' + response.statusCode);
       if(!error){
@@ -133,7 +133,7 @@ function processCityResults(response, msg){
     respondSuccess(response, msg);
   } else {
     console.log("asyncCheckGameByCity() call failed;");
-    speech = "I don't know about games in that city yet.";
+    var speech = "I don't know about games in that city yet.";
     respondFail(response, msg);
   }
 }
