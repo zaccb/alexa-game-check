@@ -112,8 +112,12 @@ function asyncCheckGameByCity(skillResponse, city){
       if(!error){
         if(response.statusCode === 200){
           var $ = cheerio.load(html);
-          console.log($('body').hasClass('yes'));
-          processCityResults(skillResponse, "yes");
+          console.log();
+          if($('body').hasClass('yes')){
+            processCityResults(skillResponse, "yes");
+          } else {
+            processCityResults(skillResponse, "no");
+          }
         } else {
           processCityResults(skillResponse, null);
         }
