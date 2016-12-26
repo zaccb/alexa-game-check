@@ -17,8 +17,8 @@
 
 var AlexaSkill = require('./AlexaSkill');
 var cities = require('./cities');
-var http = require('http');
 var request = require('request');
+var cheerio = require('cheerio');
 
 var APP_ID = 'amzn1.ask.skill.77bd2d1c-f055-4297-a899-84a17a7dd9af'; //OPTIONAL: replace with 'amzn1.echo-sdk-ams.app.[your-unique-value-here]';
 
@@ -111,12 +111,14 @@ function asyncCheckGameByCity(skillResponse, city){
       console.log('response code: ' + response.statusCode);
       if(!error){
         if(response.statusCode === 200){
+          var $ = cheerio.load(html);
+          console.log($('body').hasClass('yes'));
           processCityResults(skillResponse, "yes");
         } else {
           processCityResults(skillResponse, null);
         }
       } else {
-          respondFail(skillResponse, "I'm sorry. The server is unavailable. Try again later.");
+        respondFail(skillResponse, "I'm sorry. The server is unavailable. Try again later.");
       }
   });
 }
@@ -127,7 +129,7 @@ function processCityResults(response, msg){
     respondSuccess(response, msg);
   } else {
     console.log("asyncCheckGameByCity() call failed;");
-    speech = "I don't know about games in " + itemName + " yet.";
+    speech = "I don't know about games in that city yet.";
     respondFail(response, msg);
   }
 }
