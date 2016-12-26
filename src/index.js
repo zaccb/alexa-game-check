@@ -17,6 +17,8 @@
 
 var AlexaSkill = require('./AlexaSkill');
 var cities = require('./cities');
+var http = require('http');
+var request = require('request');
 
 var APP_ID = 'amzn1.ask.skill.77bd2d1c-f055-4297-a899-84a17a7dd9af'; //OPTIONAL: replace with 'amzn1.echo-sdk-ams.app.[your-unique-value-here]';
 
@@ -54,18 +56,12 @@ GameCheck.prototype.intentHandlers = {
             itemName = itemSlot.value.toLowerCase();
         }
 
+        var speech;
+
         console.log(itemName);
 
         if(cities.indexOf(itemName) !== -1){
-          var speech = checkGameByCity(itemName);
-
-          if(speech !== null){
-            respondSuccess(response, speech);
-          } else {
-            console.log("checkGameByCity() call failed;");
-            speech = "I don't know about games in " + itemName + " yet.";
-            respondFail(response, speech);
-          }
+            asyncCheckGameByCity(response, itemName);
         } else {
           if(itemName){
             speech = "I don't know about games in " + itemName + " yet. Sorry.";
@@ -109,11 +105,31 @@ exports.handler = function (event, context) {
     gameCheck.execute(event, context);
 };
 
-function checkGameByCity(city){
-  if(city === "seattle"){
-    return "yes";
+function asyncCheckGameByCity(skillResponse, city){
+  var url = "http://gametonight.in/" + city;
+  request(url, function(error, response, html){
+      console.log('response code: ' + response.statusCode);
+      if(!error){
+        if(response.statusCode === 200){
+          processCityResults(skillResponse, "yes");
+        } else {
+          processCityResults(skillResponse, null);
+        }
+      } else {
+          respondFail(skillResponse, "I'm sorry. The server is unavailable. Try again later.");
+      }
+  });
+}
+
+function processCityResults(response, msg){
+  console.log("processCityResults() called");
+  if(msg !== null){
+    respondSuccess(response, msg);
+  } else {
+    console.log("asyncCheckGameByCity() call failed;");
+    speech = "I don't know about games in " + itemName + " yet.";
+    respondFail(response, msg);
   }
-  return "no";
 }
 
 function respondSuccess(response, msg){
