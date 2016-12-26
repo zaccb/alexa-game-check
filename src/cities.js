@@ -1,4 +1,21 @@
 module.exports = [
-  'seattle',
-  'portland'
+  'atlanta',
+  'baltimore',
+  'bay area',
+  'boston',
+  'chicago',
+  'cincinnati',
+  'dallas',
+  'denver',
+  'lost angeles',
+  'minneapolis',
+  'new orleans',
+  'new york',
+  'oakland',
+  'philadelphia',
+  'phoenix',
+  'pittsburgh',
+  'san francisco',
+  'san jose',
+  'seattle'
 ]
