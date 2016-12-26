@@ -41,6 +41,9 @@ GameCheck.prototype.eventHandlers.onLaunch = function (launchRequest, session, r
     response.ask(speechText, repromptText);
 };
 
+/**
+ * Intent Handling
+ */
 GameCheck.prototype.intentHandlers = {
     "GetEventIntent": function (intent, session, response) {
         console.log("Intent OBJ: " + intent);
@@ -58,24 +61,33 @@ GameCheck.prototype.intentHandlers = {
 
         if(cities.indexOf(itemName) !== -1){
           var speech = checkGameByCity(itemName);
-          speechOutput = {
-              speech: speech,
-              type: AlexaSkill.speechOutputType.PLAIN_TEXT
-          };
 
-          response.tell(speechOutput);
+          if(speech !== null){
+            speechOutput = {
+                speech: speech,
+                type: AlexaSkill.speechOutputType.PLAIN_TEXT
+            };
+
+            response.tell(speechOutput);
+          } else {
+            console.log("checkGameByCity() call failed;");
+            var speech = "I don't know about games in " + itemName + " yet.";
+
+            speechOutput = {
+                speech: speech,
+                type: AlexaSkill.speechOutputType.PLAIN_TEXT
+            };
+            repromptOutput = {
+                speech: "What else can I help with?",
+                type: AlexaSkill.speechOutputType.PLAIN_TEXT
+            };
+            response.ask(speechOutput, repromptOutput);
+          }
         } else {
-          var speech = "I'm not sure how to help you with that";
-
-          speechOutput = {
-              speech: speech,
-              type: AlexaSkill.speechOutputType.PLAIN_TEXT
-          };
-          repromptOutput = {
-              speech: "What else can I help with?",
-              type: AlexaSkill.speechOutputType.PLAIN_TEXT
-          };
-          response.ask(speechOutput, repromptOutput);
+          console.log("slot value not in LIST_OF_CITIES");
+          console.log(itemName);
+          speech = "I don't know about games in " + itemName + " yet. Sorry.";
+          respondFail(response, speech);
         }
     },
 
@@ -110,8 +122,41 @@ exports.handler = function (event, context) {
 };
 
 function checkGameByCity(city){
+  // var url = "http://gametonight.in/" + city;
+  //
+  // var options = {
+  //     host : url,
+  //     method : 'GET'
+  // };
+  //
+  // var request = http.request(options, function(){
+  //   if(res.statusCode === '200'){
+  //     return "Yes";
+  //   } else {
+  //     return new Error("I don't know about events in that city yet.");
+  //   }
+  // });
+  //
+  // request.on('error', function(err) {
+  //     return new Error("I'm having a hard time connecting with the server right now.");
+  // });
+  //
+  // request.end();
+
   if(city === "seattle"){
     return "yes";
   }
   return "no";
+}
+
+function respondFail(response, msg){
+  var speechOutput = {
+      speech: msg,
+      type: AlexaSkill.speechOutputType.PLAIN_TEXT
+  };
+  var repromptOutput = {
+      speech: "What else can I help with?",
+      type: AlexaSkill.speechOutputType.PLAIN_TEXT
+  };
+  response.ask(speechOutput, repromptOutput);
 }
