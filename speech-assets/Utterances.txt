@@ -1,6 +1,41 @@
+GetEventIntent a game
+GetEventIntent a game in {City}
+GetEventIntent a game today
+GetEventIntent a game today in {City}
+GetEventIntent a game tonight
+GetEventIntent a game tonight in {City}
+GetEventIntent there's a game
+GetEventIntent there's a game in {City}
+GetEventIntent there's a game today
+GetEventIntent there's a game today in {City}
+GetEventIntent there's a game tonight
+GetEventIntent there's a game tonight in {City}
+GetEventIntent is there a game today
 GetEventIntent is there a game tonight
 GetEventIntent is there a game tonight in {City}
+GetEventIntent an event
+GetEventIntent an event in {City}
+GetEventIntent an event today
+GetEventIntent an event today in {City}
+GetEventIntent an event tonight
+GetEventIntent an event tonight in {City}
+GetEventIntent there's an event
+GetEventIntent there's an event in {City}
+GetEventIntent there's an event today
+GetEventIntent there's an event today in {City}
+GetEventIntent there's an event tonight
+GetEventIntent an event tonight in {City}
+GetEventIntent is there an event today
+GetEventIntent is there an event today in {City}
 GetEventIntent is there an event tonight
 GetEventIntent is there an event tonight in {City}
+GetEventIntent something happening
+GetEventIntent something happening in {City}
+GetEventIntent something happening today
+GetEventIntent something happening today in {City}
+GetEventIntent something happening tonight
+GetEventIntent something happening tonight in {City}
+GetEventIntent is something happening today
+GetEventIntent is something happening today in {City}
 GetEventIntent is something happening tonight
 GetEventIntent is something happening tonight in {City}
