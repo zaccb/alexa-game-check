@@ -66,7 +66,7 @@ GameCheck.prototype.intentHandlers = {
           if(itemName){
             speech = "I don't know about games in " + itemName + " yet. Sorry.";
           } else {
-            speech = "Please rephrase your question. If you didn't say a city, you'll need ot include that in your request.";
+            speech = "Please rephrase your question. If you didn't say a city, you'll need to include that in your request.";
           }
 
           console.log("slot value not in LIST_OF_CITIES");
