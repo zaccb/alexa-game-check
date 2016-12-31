@@ -78,7 +78,7 @@ GameCheck.prototype.intentHandlers = {
     "InvalidIntent": function(intent, session, response){
       var speech = "I'm sorry, I don't understand what you said.";
       respondFail(response, speech);
-    }
+    },
 
     "AMAZON.StopIntent": function (intent, session, response) {
         var speechOutput = "Goodbye";
