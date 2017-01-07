@@ -43,6 +43,22 @@ GameCheck.prototype.eventHandlers.onLaunch = function (launchRequest, session, r
     response.ask(speechText, repromptText);
 };
 
+GameCheck.prototype.eventHandlers.onIntent = function (intentRequest, session, response) {
+    console.log("response", response);
+    console.log("intent", intentRequest.intent);
+    console.log("intentName", intentRequest.intent.name);
+
+    var intent = intentRequest.intent,
+        intentName = intentRequest.intent.name,
+        intentHandler = this.intentHandlers[intentName];
+    if (intentHandler) {
+        console.log('dispatch intent = ' + intentName);
+        intentHandler.call(this, intent, session, response);
+    } else {
+        throw 'Unsupported intent = ' + intentName;
+    }
+};
+
 /**
  * Intent Handling
  */
