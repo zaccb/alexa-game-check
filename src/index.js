@@ -36,7 +36,7 @@ GameCheck.prototype = Object.create(AlexaSkill.prototype);
 GameCheck.prototype.constructor = GameCheck;
 
 GameCheck.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    var speechText = "Welcome to the Game Check Helper. You can ask me if there's a game today in your city and I'll check it out and let you know.";
+    var speechText = "Game Check initialized. Hello, friend. You can ask me if there's a game today in your city and I'll check it out and let you know.";
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     var repromptText = "Ask me if there is an game today in your city.";
