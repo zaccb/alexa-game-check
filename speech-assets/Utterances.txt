@@ -39,3 +39,9 @@ GetEventIntent is something happening today
 GetEventIntent is something happening today in {City}
 GetEventIntent is something happening tonight
 GetEventIntent is something happening tonight in {City}
+GetEventIntent something is happening
+GetEventIntent something is happening in {City}
+GetEventIntent something is happening today
+GetEventIntent something is happening today in {City}
+GetEventIntent something is happening tonight
+GetEventIntent something is happening tonight in {City}
